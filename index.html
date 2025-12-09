@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CORNER of NO FIXED ADDRESS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Share+Tech+Mono&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="styles.css" />
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <div class="static-noise" aria-hidden="true"></div>
+  <header class="hero" id="landing">
+    <div class="hero-video" aria-hidden="true"></div>
+    <div class="hero-body">
+      <div class="logo-stack">
+        <div class="much-logo">MUCH</div>
+        <div class="banner">CORNER of NO FIXED ADDRESS</div>
+      </div>
+      <p class="hero-tagline">
+        A gritty, citywide booth where folks experiencing homelessness, poverty, and the housing crisis can share
+        lived experience—no filter, no gatekeepers, just truth.
+      </p>
+      <button id="cta-record" class="cta glitch-btn" type="button">STEP INTO THE BOOTH</button>
+      <p class="disclaimer">
+        Speak unfiltered, but keep it safe—hate speech, harassment, and illegal content will be removed.
+      </p>
+      <div class="hero-meta">
+        <span class="meta-chip">Live VHS filter</span>
+        <span class="meta-chip">10-second countdown</span>
+        <span class="meta-chip">2-minute max rants</span>
+      </div>
+    </div>
+  </header>
+
+  <section class="booth" id="booth">
+    <div class="section-heading">
+      <h2>Inside the Booth</h2>
+      <p>Instant recorder. Minimal editing. Vintage attitude.</p>
+    </div>
+    <div class="booth-card">
+      <div class="booth-info">
+        <p>
+          The on-screen timer flashes a 10-second countdown with the Much beep before recording. Speak for up to
+          2:30 and add one text title to label your rant ("Why Tim Hortons Double Doubles Are Overrated"). 
+        </p>
+        <p>
+          Pick from VHS grain, neon overlay, or scan-line filters. No face-tuning, no fancy effects—just you, the mic,
+          and the vibes.
+        </p>
+        <div class="guest-signup">
+          <button class="ghost-btn">Create a free booth account</button>
+          <span>Anonymity encouraged. Accounts only keep your replies and shoutouts in one place.</span>
+        </div>
+      </div>
+      <div class="booth-preview" aria-live="polite">
+        <div class="booth-overlay" id="recorder-overlay">
+          <div class="overlay-panel">
+            <p class="overlay-title">Recording in</p>
+            <p id="countdown" class="countdown">10</p>
+            <input id="rant-title" type="text" maxlength="60" placeholder="Add a title for your rant" />
+            <fieldset>
+              <legend>Choose a filter</legend>
+              <label><input type="radio" name="filter" value="vhs" checked /> VHS grain</label>
+              <label><input type="radio" name="filter" value="neon" /> Neon glow</label>
+              <label><input type="radio" name="filter" value="scan" /> Scan lines</label>
+            </fieldset>
+            <button id="cancel-record" class="ghost-btn">Cancel</button>
+          </div>
+        </div>
+        <div class="preview-label">Booth preview</div>
+        <video id="preview" autoplay muted playsinline></video>
+        <div class="preview-status" id="preview-status">Your camera preview will appear here.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="content-feed" id="content-feed">
+    <div class="section-heading">
+      <h2>The Corner</h2>
+      <p>Raw Feed, no algorithmic hype. Just time-ordered perspective.</p>
+    </div>
+    <div class="feed-controls">
+      <div class="view-toggle" role="tablist">
+        <button data-view="raw" class="active" role="tab">Raw Feed</button>
+        <button data-view="curated" role="tab">Curated by Much</button>
+        <button data-view="throwback" role="tab">Throwback Archive</button>
+      </div>
+      <div class="topic-toggle">
+        <span>Topics</span>
+        <button data-topic="all" class="active">All</button>
+        <button data-topic="school">Rants About School</button>
+        <button data-topic="bands">Local Band Shoutouts</button>
+        <button data-topic="pet">Pet Peeves</button>
+        <button data-topic="love">Love Confessions</button>
+      </div>
+    </div>
+    <div id="feed" class="feed-grid"></div>
+  </section>
+
+  <section class="community" id="community">
+    <div class="community-card">
+      <h3>Shoutout Wall</h3>
+      <p>Text-only shoutouts, birthday wishes, or amateurs promoting their next show.</p>
+      <form id="shoutout-form">
+        <textarea id="shoutout-text" maxlength="140" placeholder="Post a shoutout"></textarea>
+        <button type="submit" class="ghost-btn">Send it to the wall</button>
+      </form>
+      <ul id="shoutout-list"></ul>
+    </div>
+    <div class="community-card">
+      <h3>Reply Chain</h3>
+      <p>
+        Record a video reply right from the feed. Rant replies create digital back-and-forths that stay in the booth
+        land.
+      </p>
+      <div class="reply-cues">Select a rant and hit Reply.</div>
+    </div>
+  </section>
+
+  <section class="meetups" id="meetups">
+    <div class="section-heading">
+      <h2>Booth Meetups</h2>
+      <p>Pop-up sessions at malls and campus events. Film in a physical replica of the original booth.</p>
+    </div>
+    <div class="meetup-calendar">
+      <article>
+        <h4>Dec 19 — Yorkdale Mall</h4>
+        <p>High schoolers take over the food court stage. Doors open at noon.</p>
+        <button class="ghost-btn">Upload footage</button>
+      </article>
+      <article>
+        <h4>Jan 11 — Queen's University</h4>
+        <p>Campus radio collab. Drop your campus rant, meet the volunteer VJs.</p>
+        <button class="ghost-btn">Join the queue</button>
+      </article>
+      <article>
+        <h4>Jan 26 — Much Studios</h4>
+        <p>Flagship live stream night. Rick Campanelli hosts the queue.</p>
+        <button class="ghost-btn">Live Booth Night</button>
+      </article>
+    </div>
+  </section>
+
+  <section class="leaderboard" id="leaderboard">
+    <div class="section-heading">
+      <h2>Booth Leaderboard</h2>
+      <p>Ranked by replies, not likes. Passionate voice wins.</p>
+    </div>
+    <ol>
+      <li>Rant replies: 28 — @pixelriot</li>
+      <li>Rant replies: 21 — @neonrave</li>
+      <li>Rant replies: 17 — @garagebandgurl</li>
+    </ol>
+  </section>
+
+  <section class="merch" id="merch">
+    <div class="section-heading">
+      <h2>Merch Shop</h2>
+      <p>Neon tees, sticker packs, and mini booth keychains. Proceeds keep the booth online.</p>
+    </div>
+    <div class="merch-items">
+      <article>
+        <h4>Salmon Neon Tee</h4>
+        <p>Retro-fitted cotton with glitch varsity print.</p>
+        <button class="ghost-btn">Buy</button>
+      </article>
+      <article>
+        <h4>Speakers Corner Stickers</h4>
+        <p>Peel-and-stick throwback logos, pixel borders, and static blocks.</p>
+        <button class="ghost-btn">Add to cart</button>
+      </article>
+      <article>
+        <h4>Mini Booth Keychain</h4>
+        <p>Miniature replica you can hang on your backpack.</p>
+        <button class="ghost-btn">Buy</button>
+      </article>
+    </div>
+  </section>
+
+  <section class="live-booth" id="live-booth">
+    <div class="section-heading">
+      <h2>Live Booth Nights</h2>
+      <p>Monthly livestreams featuring guest VJs, chat, and a live queue of rappers, romancers, and rebels.</p>
+    </div>
+    <div class="live-details">
+      <p>Next stream: Dec 31 • 9:30PM ET • Hosted by Sook-Yin Lee.</p>
+      <button class="glitch-btn" type="button">Add me to the queue</button>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p>Retro textures, glitchy hovers, and the MuchMusic vibe—built for the people who remember the booth and the ones discovering it late.</p>
+    <p>Sharing icons let you drop the link on TikTok, Instagram Stories, or X.</p>
+  </footer>
+</body>
+</html>

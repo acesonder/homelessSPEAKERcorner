@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Login - The Control Room</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body class="login-page">
+  <div class="login-container">
+    <div class="login-box">
+      <h1>🔐 THE CONTROL ROOM</h1>
+      <p class="login-subtitle">Administrative Access Portal</p>
+      
+      <form id="login-form">
+        <div class="form-group">
+          <label for="passcode">Enter Passcode</label>
+          <input type="password" id="passcode" placeholder="••••••" maxlength="6" required autofocus>
+        </div>
+        <button type="submit">ACCESS CONTROL ROOM</button>
+        <p id="error-message" class="error-message"></p>
+      </form>
+      
+      <a href="../index.html" class="back-link">← Back to Demos</a>
+    </div>
+  </div>
+
+  <script>
+    const CORRECT_PASSCODE = '079777';
+    
+    document.getElementById('login-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const passcode = document.getElementById('passcode').value;
+      const errorMsg = document.getElementById('error-message');
+      
+      if (passcode === CORRECT_PASSCODE) {
+        localStorage.setItem('admin_authenticated', 'true');
+        localStorage.setItem('admin_login_time', Date.now());
+        window.location.href = 'dashboard.html';
+      } else {
+        errorMsg.textContent = 'Invalid passcode. Access denied.';
+        errorMsg.style.display = 'block';
+        document.getElementById('passcode').value = '';
+        
+        // Flash red
+        document.querySelector('.login-box').style.borderColor = '#ff3333';
+        setTimeout(() => {
+          document.querySelector('.login-box').style.borderColor = '#444';
+        }, 500);
+      }
+    });
+  </script>
+</body>
+</html>

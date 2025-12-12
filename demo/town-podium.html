@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>THE VOICE OF THE TOWN PODIUM</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/shared.css">
+  <link rel="stylesheet" href="css/town-podium.css">
+</head>
+<body>
+  <div class="container">
+    <a href="index.html" class="back-link">← Back to Demo Index</a>
+    
+    <header>
+      <h1>THE VOICE OF THE TOWN PODIUM</h1>
+      <p>A small wooden podium sits at the bottom of the page, with a single microphone and a spotlight.</p>
+    </header>
+
+    <div class="topic-selector">
+      <label for="topic-select">TODAY'S COMMUNITY MEETING TOPIC</label>
+      <select id="topic-select">
+        <option value="needs-saying">What needs to be said that nobody is saying?</option>
+        <option value="county-council">What's your message to County Council?</option>
+        <option value="intersects-life">How does homelessness intersect with your life?</option>
+        <option value="affordable-housing">What would real affordable housing look like?</option>
+        <option value="avoid-shelters">Why do some people avoid shelters?</option>
+        <option value="support-saved">What support saved your life once?</option>
+        <option value="dignity-means">What does dignity look like for someone homeless?</option>
+        <option value="recovery-complicated">What makes recovery so complicated?</option>
+        <option value="policy-push">What policy change would you push through today?</option>
+        <option value="community-responsibility">What does "community responsibility" mean to you?</option>
+      </select>
+    </div>
+
+    <div class="podium-stage">
+      <div class="spotlight"></div>
+      <div class="podium">
+        <div class="podium-top">
+          <div class="microphone">🎤</div>
+        </div>
+        <div class="podium-body"></div>
+        <div class="podium-base"></div>
+      </div>
+      <div id="current-speaker" class="speaker-box">
+        <div class="speech-bubble">
+          <p class="waiting-text">Step up to the podium and speak your truth</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="comment-section">
+      <h2>TAKE THE PODIUM</h2>
+      <form id="comment-form" class="comment-form podium-form">
+        <input type="text" id="comment-name" placeholder="Your name (or Anonymous)" maxlength="50">
+        <textarea id="comment-text" placeholder="Your statement to the community..." maxlength="500" required></textarea>
+        <button type="submit">🎙️ SPEAK</button>
+      </form>
+
+      <h2>COMMUNITY STATEMENTS</h2>
+      <ul id="comments-list" class="comments-list podium-statements"></ul>
+    </div>
+  </div>
+
+  <script src="js/shared.js"></script>
+  <script src="js/town-podium.js"></script>
+</body>
+</html>

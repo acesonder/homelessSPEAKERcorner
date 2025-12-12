@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>THE RETRO TV DEBATE STATION</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/shared.css">
+  <link rel="stylesheet" href="css/retro-tv.css">
+</head>
+<body>
+  <div class="container">
+    <a href="index.html" class="back-link">← Back to Demo Index</a>
+    
+    <header>
+      <h1>THE RETRO TV DEBATE STATION</h1>
+      <p>A crackling CRT hums in the center of the page, its rounded glass flickering with public voices.</p>
+    </header>
+
+    <div class="tv-container">
+      <div class="tv-frame">
+        <div class="tv-screen">
+          <div class="tv-static"></div>
+          <div class="tv-scanlines"></div>
+          <div class="tv-content">
+            <div class="broadcast-label">NOW BROADCASTING</div>
+            <div id="current-topic" class="tv-topic">Select a topic below to begin discussion</div>
+            <div id="comment-crawl" class="comment-crawl"></div>
+          </div>
+          <div class="tv-glow"></div>
+        </div>
+        <div class="tv-base">
+          <div class="tv-speaker"></div>
+          <div class="tv-knob"></div>
+          <div class="tv-knob"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="audio-toggle">
+      <label for="audio-mode">
+        <span class="metal-toggle">🔊 Audio Mode</span>
+      </label>
+      <input type="checkbox" id="audio-mode">
+    </div>
+
+    <div class="topic-selector">
+      <label for="topic-select">SELECT TODAY'S BROADCAST TOPIC</label>
+      <select id="topic-select">
+        <option value="housing-barriers">What barriers stop people from getting permanent housing right now?</option>
+        <option value="sleep-deprivation">How does sleep deprivation affect your daily functioning?</option>
+        <option value="support-services">What support services actually make a difference for people using substances?</option>
+        <option value="other-towns">How has homelessness been handled well in other towns you've lived in?</option>
+        <option value="policy-change">What single policy change would help the most people today?</option>
+        <option value="low-barrier">Does Cobourg have enough low-barrier options for those who need them?</option>
+        <option value="stigma-recovery">How do stigma and judgment impact someone's recovery journey?</option>
+        <option value="safe-sleep">What does a "safe place to sleep" mean to you personally?</option>
+        <option value="county-change">What's one change you'd want the County to implement immediately?</option>
+        <option value="addiction-misunderstanding">What's something people misunderstand about addiction?</option>
+      </select>
+    </div>
+
+    <div class="comment-section">
+      <h2>BROADCAST YOUR VOICE</h2>
+      <form id="comment-form" class="comment-form">
+        <input type="text" id="comment-name" placeholder="Your name (or stay Anonymous)" maxlength="50">
+        <textarea id="comment-text" placeholder="Share your thoughts on this topic..." maxlength="500" required></textarea>
+        <button type="submit">📡 BROADCAST MESSAGE</button>
+      </form>
+
+      <h2>LIVE BROADCAST FEED</h2>
+      <div class="broadcast-counter">
+        <span id="comment-count">0</span> messages broadcast
+      </div>
+      <ul id="comments-list" class="comments-list"></ul>
+    </div>
+  </div>
+
+  <script src="js/shared.js"></script>
+  <script src="js/retro-tv.js"></script>
+</body>
+</html>

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - The Control Room</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+  <div class="admin-container">
+    <div class="admin-header">
+      <h1>🎛️ THE CONTROL ROOM</h1>
+      <div class="status-indicator">
+        <span class="status-light"></span>
+        <span>SYSTEM ONLINE</span>
+        <button class="logout-btn" onclick="logout()">Logout</button>
+      </div>
+    </div>
+
+    <!-- Emergency Mode -->
+    <div class="emergency-mode" style="display: none;" id="emergency-section">
+      <h2>⚠️ EMERGENCY MODE</h2>
+      <p>Emergency mode is currently: <span id="emergency-status">OFF</span></p>
+      <label class="toggle-switch">
+        <input type="checkbox" id="emergency-toggle">
+        <span class="slider"></span>
+      </label>
+      <div id="emergency-controls" style="display: none; margin-top: 20px;">
+        <textarea id="emergency-message" placeholder="Emergency alert message..." style="width: 100%; padding: 10px; margin-bottom: 10px;"></textarea>
+        <button class="action-btn" onclick="broadcastEmergency()">🚨 BROADCAST ALERT</button>
+      </div>
+    </div>
+
+    <!-- Live System Tiles -->
+    <div class="dashboard-grid">
+      <div class="tile">
+        <h3>Comments Today</h3>
+        <div class="value" id="comments-today">0</div>
+        <div class="label">Total across all demos</div>
+      </div>
+      
+      <div class="tile">
+        <h3>Comments This Hour</h3>
+        <div class="value" id="comments-hour">0</div>
+        <div class="label">Recent activity</div>
+      </div>
+      
+      <div class="tile">
+        <h3>Active Topics</h3>
+        <div class="value" id="active-topics">7</div>
+        <div class="label">Demo projects</div>
+      </div>
+      
+      <div class="tile">
+        <h3>Flagged Posts</h3>
+        <div class="value" id="flagged-posts">0</div>
+        <div class="label">Requiring review</div>
+      </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="quick-actions">
+      <h2>QUICK ACTIONS</h2>
+      <div class="action-buttons">
+        <a href="topics.html" class="action-btn">📝 Manage Topics</a>
+        <a href="moderation.html" class="action-btn">🔍 Moderate Comments</a>
+        <a href="broadcast.html" class="action-btn">📡 Broadcast Studio</a>
+        <a href="polls.html" class="action-btn">📊 Polls & Heat Checks</a>
+        <a href="resources.html" class="action-btn">🆘 Resource Manager</a>
+        <a href="analytics.html" class="action-btn">📈 Analytics</a>
+        <a href="themes.html" class="action-btn">🎨 Theme Designer</a>
+        <a href="security.html" class="action-btn">🔒 Security & Logs</a>
+      </div>
+    </div>
+
+    <!-- Recent Activity -->
+    <div class="section">
+      <h2>RECENT ACTIVITY</h2>
+      <table id="recent-activity">
+        <thead>
+          <tr>
+            <th>Time</th>
+            <th>Demo</th>
+            <th>User</th>
+            <th>Action</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Just now</td>
+            <td>Retro TV</td>
+            <td>Anonymous</td>
+            <td>New comment posted</td>
+            <td><span class="badge badge-active">Active</span></td>
+          </tr>
+          <tr>
+            <td>5 mins ago</td>
+            <td>Graffiti Wall</td>
+            <td>CommunityVoice</td>
+            <td>Tagged wall</td>
+            <td><span class="badge badge-active">Active</span></td>
+          </tr>
+          <tr>
+            <td>12 mins ago</td>
+            <td>Streetlight Lantern</td>
+            <td>Anonymous</td>
+            <td>New comment posted</td>
+            <td><span class="badge badge-active">Active</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Demo Project Status -->
+    <div class="section">
+      <h2>DEMO PROJECT STATUS</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Demo Project</th>
+            <th>Total Comments</th>
+            <th>Today</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="demo-stats">
+          <tr>
+            <td>📺 Retro TV Debate Station</td>
+            <td id="tv-total">0</td>
+            <td id="tv-today">0</td>
+            <td><span class="badge badge-active">Active</span></td>
+          </tr>
+          <tr>
+            <td>💡 Streetlight Topic Lantern</td>
+            <td id="lantern-total">0</td>
+            <td id="lantern-today">0</td>
+            <td><span class="badge badge-active">Active</span></td>
+          </tr>
+          <tr>
+            <td>🎨 Graffiti Wall of Truth</td>
+            <td id="wall-total">0</td>
+            <td id="wall-today">0</td>
+            <td><span class="badge badge-active">Active</span></td>
+          </tr>
+          <tr>
+            <td>☕ Café Chat Window</td>
+            <td id="cafe-total">0</td>
+            <td id="cafe-today">0</td>
+            <td><span class="badge badge-active">Active</span></td>
+          </tr>
+          <tr>
+            <td>📡 Police Scanner Feed</td>
+            <td id="scanner-total">0</td>
+            <td id="scanner-today">0</td>
+            <td><span class="badge badge-active">Active</span></td>
+          </tr>
+          <tr>
+            <td>🎙️ Voice of the Town Podium</td>
+            <td id="podium-total">0</td>
+            <td id="podium-today">0</td>
+            <td><span class="badge badge-active">Active</span></td>
+          </tr>
+          <tr>
+            <td>🎬 Midnight Documentary Room</td>
+            <td id="doc-total">0</td>
+            <td id="doc-today">0</td>
+            <td><span class="badge badge-active">Active</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script src="js/admin-auth.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>

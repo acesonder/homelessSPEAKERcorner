@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Demo Projects - Homeless Speaker Corner</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Permanent+Marker&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Share Tech Mono', monospace;
+      background: linear-gradient(135deg, #1a1a2e 0%, #0a0a0a 100%);
+      color: #e0e0e0;
+      line-height: 1.6;
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    h1 {
+      font-family: 'Permanent Marker', cursive;
+      font-size: 3em;
+      margin-bottom: 20px;
+      text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8);
+      color: #fff;
+    }
+
+    .subtitle {
+      font-size: 1.2em;
+      color: #aaa;
+    }
+
+    .demo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin-bottom: 60px;
+    }
+
+    .demo-card {
+      background: linear-gradient(135deg, rgba(42, 42, 42, 0.8), rgba(26, 26, 26, 0.8));
+      border-radius: 15px;
+      padding: 30px;
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.3s;
+      border: 2px solid #333;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .demo-card:hover {
+      transform: translateY(-10px);
+      border-color: #666;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
+    }
+
+    .demo-card h2 {
+      font-family: 'Permanent Marker', cursive;
+      font-size: 1.5em;
+      margin-bottom: 15px;
+      color: #fff;
+    }
+
+    .demo-card .icon {
+      font-size: 3em;
+      margin-bottom: 15px;
+      display: block;
+    }
+
+    .demo-card p {
+      color: #aaa;
+      line-height: 1.8;
+    }
+
+    .admin-section {
+      margin-top: 60px;
+      padding-top: 60px;
+      border-top: 2px solid #333;
+      text-align: center;
+    }
+
+    .admin-button {
+      display: inline-block;
+      padding: 20px 40px;
+      background: linear-gradient(135deg, #ff3333 0%, #cc0000 100%);
+      color: #fff;
+      text-decoration: none;
+      border-radius: 10px;
+      font-size: 1.2em;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      transition: all 0.3s;
+      box-shadow: 0 10px 30px rgba(255, 51, 51, 0.3);
+    }
+
+    .admin-button:hover {
+      background: linear-gradient(135deg, #ff5555 0%, #ff3333 100%);
+      transform: translateY(-5px);
+      box-shadow: 0 15px 40px rgba(255, 51, 51, 0.5);
+    }
+
+    .main-site-link {
+      display: inline-block;
+      margin-bottom: 40px;
+      padding: 15px 30px;
+      background: rgba(42, 42, 42, 0.5);
+      color: #e0e0e0;
+      text-decoration: none;
+      border-radius: 8px;
+      border: 2px solid #444;
+      transition: all 0.3s;
+    }
+
+    .main-site-link:hover {
+      background: rgba(62, 62, 62, 0.7);
+      border-color: #666;
+      transform: translateX(-5px);
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2em;
+      }
+
+      .demo-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="../index.html" class="main-site-link">← Back to Main Site</a>
+    
+    <header>
+      <h1>DEMO PROJECTS</h1>
+      <p class="subtitle">Interactive community voice platforms for homelessness advocacy</p>
+    </header>
+
+    <div class="demo-grid">
+      <a href="retro-tv.html" class="demo-card">
+        <span class="icon">📺</span>
+        <h2>THE RETRO TV DEBATE STATION</h2>
+        <p>A crackling CRT hums in the center of the page, its rounded glass flickering with public voices. Perfect for weekly featured topics.</p>
+      </a>
+
+      <a href="streetlight-lantern.html" class="demo-card">
+        <span class="icon">💡</span>
+        <h2>THE STREETLIGHT TOPIC LANTERN</h2>
+        <p>A tall digital streetlamp glows at the edge of the page, its soft halo changing colour with each topic. Share stories under the lamp.</p>
+      </a>
+
+      <a href="graffiti-wall.html" class="demo-card">
+        <span class="icon">🎨</span>
+        <h2>THE GRAFFITI WALL OF TRUTH</h2>
+        <p>A digital wall styled like layered posters, torn stickers, chalk scrawls, and marker messages. Raw community voice. No filters.</p>
+      </a>
+
+      <a href="cafe-chat.html" class="demo-card">
+        <span class="icon">☕</span>
+        <h2>THE CAFÉ CHAT WINDOW</h2>
+        <p>A cozy late-night café interface with warm wood texture and quiet ambiance. Pull up a chair, let's talk.</p>
+      </a>
+
+      <a href="police-scanner.html" class="demo-card">
+        <span class="icon">📡</span>
+        <h2>THE POLICE SCANNER FEED</h2>
+        <p>A retro emergency-radio theme where messages roll in like dispatch logs. Excellent for alert topics and crisis response.</p>
+      </a>
+
+      <a href="town-podium.html" class="demo-card">
+        <span class="icon">🎙️</span>
+        <h2>THE VOICE OF THE TOWN PODIUM</h2>
+        <p>A wooden podium with a single microphone and spotlight. Step up and speak boldly on serious issues.</p>
+      </a>
+
+      <a href="documentary-room.html" class="demo-card">
+        <span class="icon">🎬</span>
+        <h2>THE MIDNIGHT DOCUMENTARY ROOM</h2>
+        <p>A darkened page with a projector and grainy overlays. Like watching a late-night documentary on lived experiences.</p>
+      </a>
+    </div>
+
+    <div class="admin-section">
+      <h2 style="margin-bottom: 30px; font-family: 'Permanent Marker', cursive; font-size: 2em;">ADMINISTRATION</h2>
+      <a href="admin/" class="admin-button">🔐 ADMIN CONTROL ROOM</a>
+    </div>
+  </div>
+</body>
+</html>

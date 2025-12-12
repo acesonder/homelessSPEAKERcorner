@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>THE MIDNIGHT DOCUMENTARY ROOM</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/shared.css">
+  <link rel="stylesheet" href="css/documentary-room.css">
+</head>
+<body>
+  <div class="container">
+    <a href="index.html" class="back-link">← Back to Demo Index</a>
+    
+    <header>
+      <h1>THE MIDNIGHT DOCUMENTARY ROOM</h1>
+      <p>A darkened page with a projector, grainy overlays, and quiet ambience — like watching a late-night doc.</p>
+    </header>
+
+    <div class="projector-scene">
+      <div class="projector">
+        <div class="projector-body">
+          <div class="projector-lens"></div>
+          <div class="projector-light"></div>
+        </div>
+        <div class="projector-beam"></div>
+      </div>
+      
+      <div class="screen-container">
+        <div class="screen">
+          <div class="film-grain"></div>
+          <div class="screen-content">
+            <div id="documentary-title" class="doc-title">Select a topic below</div>
+            <div class="doc-info">
+              <p>Share your reflections on lived experiences, advocacy stories, and community perspectives.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="topic-selector">
+      <label for="topic-select">TONIGHT'S DOCUMENTARY TOPIC</label>
+      <select id="topic-select">
+        <option value="story-hit">What part of this story hit you hardest?</option>
+        <option value="your-life">What does this video make you think about in your own life?</option>
+        <option value="system-change">What would you change in the system shown here?</option>
+        <option value="gives-hope">What gives you hope?</option>
+        <option value="recovery-unpredictable">What makes recovery so unpredictable?</option>
+        <option value="trauma-shapes">How does trauma shape someone's path?</option>
+        <option value="film-missing">What's something the film didn't show that matters?</option>
+        <option value="missing-service">What's the biggest missing service in this town?</option>
+        <option value="prevent-stories">What could prevent stories like this?</option>
+        <option value="next-topic">What should be the next documentary topic?</option>
+      </select>
+    </div>
+
+    <div class="comment-section">
+      <h2>COMMENTARY TRACK</h2>
+      <form id="comment-form" class="comment-form doc-form">
+        <input type="text" id="comment-name" placeholder="Your name (or Anonymous)" maxlength="50">
+        <textarea id="comment-text" placeholder="Share your thoughts on this documentary..." maxlength="500" required></textarea>
+        <button type="submit">🎬 ADD TO COMMENTARY</button>
+      </form>
+
+      <h2>VIEWER REFLECTIONS</h2>
+      <ul id="comments-list" class="comments-list doc-comments"></ul>
+    </div>
+  </div>
+
+  <script src="js/shared.js"></script>
+  <script src="js/documentary-room.js"></script>
+</body>
+</html>

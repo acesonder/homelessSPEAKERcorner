@@ -660,7 +660,6 @@ body.corner-15 {
   border-bottom: 2px solid var(--accent);
   padding: 1rem 2rem;
   z-index: 1000;
-  backdrop-filter: blur(10px);
 }
 
 .header-content {
@@ -704,7 +703,6 @@ body.corner-15 {
   grid-template-rows: auto auto 1fr;
   gap: 1.5rem;
   padding: 2rem;
-  transform-style: preserve-3d;
 }
 
 .diagonal-hero {

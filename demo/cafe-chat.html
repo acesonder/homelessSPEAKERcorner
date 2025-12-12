@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>THE CAFÉ CHAT WINDOW</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/shared.css">
+  <link rel="stylesheet" href="css/cafe-chat.css">
+</head>
+<body>
+  <div class="container">
+    <a href="index.html" class="back-link">← Back to Demo Index</a>
+    
+    <header>
+      <h1>THE CAFÉ CHAT WINDOW</h1>
+      <p>A cozy late-night café interface — warm wood texture, quiet ambiance, and a steaming mug icon that animates gently.</p>
+    </header>
+
+    <div class="cafe-scene">
+      <div class="mug-container">
+        <div class="mug">☕</div>
+        <div class="steam"></div>
+      </div>
+      <div class="chalkboard">
+        <div class="chalkboard-header">Today's Conversation</div>
+        <div id="current-topic" class="chalkboard-topic">Select a topic below</div>
+      </div>
+    </div>
+
+    <div class="topic-selector">
+      <label for="topic-select">PULL UP A CHAIR, LET'S TALK ABOUT...</label>
+      <select id="topic-select">
+        <option value="exhausting-crisis">What's the most exhausting part of being in crisis?</option>
+        <option value="who-helped">Who helped you when you felt invisible?</option>
+        <option value="cobourg-ignores">What do you think Cobourg ignores about homelessness?</option>
+        <option value="stability-looks">What does stability look like for you?</option>
+        <option value="keep-safe">What would help keep people safe at night?</option>
+        <option value="kindness-wish">What's a kindness you wish more people offered?</option>
+        <option value="system-navigation">What part of the system feels impossible to navigate?</option>
+        <option value="good-day">What does a "good day" look like right now?</option>
+        <option value="sleep-mental-health">How has sleep loss affected your mental health?</option>
+        <option value="recovery-means">What does recovery mean to you?</option>
+      </select>
+    </div>
+
+    <div class="comment-section">
+      <h2>SHARE ACROSS THE TABLE</h2>
+      <form id="comment-form" class="comment-form cafe-form">
+        <input type="text" id="comment-name" placeholder="Your name (or stay Anonymous)" maxlength="50">
+        <textarea id="comment-text" placeholder="Your story matters here..." maxlength="500" required></textarea>
+        <button type="submit">💬 Share Your Story</button>
+      </form>
+
+      <h2>CAFÉ CONVERSATIONS</h2>
+      <ul id="comments-list" class="comments-list cafe-comments"></ul>
+    </div>
+  </div>
+
+  <script src="js/shared.js"></script>
+  <script src="js/cafe-chat.js"></script>
+</body>
+</html>

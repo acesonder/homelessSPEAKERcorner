@@ -1,0 +1,220 @@
+/* Voice of the Town Podium Styles */
+
+body {
+  background: linear-gradient(to bottom, #1a1a2e 0%, #0a0a0a 100%);
+}
+
+.podium-stage {
+  position: relative;
+  min-height: 500px;
+  background: 
+    radial-gradient(ellipse at center top, rgba(255, 255, 255, 0.1) 0%, transparent 60%),
+    linear-gradient(to bottom, #0a0a0a 0%, #1a1a1a 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 40px 20px;
+  margin: 40px 0;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.spotlight {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 300px;
+  height: 400px;
+  background: radial-gradient(
+    ellipse at top,
+    rgba(255, 255, 200, 0.3) 0%,
+    rgba(255, 255, 200, 0.1) 50%,
+    transparent 100%
+  );
+  pointer-events: none;
+  animation: spotlight-flicker 3s ease-in-out infinite;
+}
+
+@keyframes spotlight-flicker {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.85; }
+}
+
+.podium {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 2;
+  margin-bottom: 30px;
+}
+
+.podium-top {
+  width: 180px;
+  height: 20px;
+  background: linear-gradient(to bottom, #8B7355 0%, #6B5345 100%);
+  border-radius: 10px 10px 0 0;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  position: relative;
+}
+
+.microphone {
+  font-size: 2.5em;
+  position: absolute;
+  top: -40px;
+  animation: mic-sway 4s ease-in-out infinite;
+  filter: drop-shadow(0 10px 10px rgba(0, 0, 0, 0.5));
+}
+
+@keyframes mic-sway {
+  0%, 100% { transform: rotate(-2deg); }
+  50% { transform: rotate(2deg); }
+}
+
+.podium-body {
+  width: 160px;
+  height: 120px;
+  background: linear-gradient(135deg, #8B7355 0%, #6B5345 50%, #4A3829 100%);
+  box-shadow: 
+    0 10px 30px rgba(0, 0, 0, 0.8),
+    inset 0 0 20px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+.podium-body::before {
+  content: '🏛️';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 3em;
+  opacity: 0.3;
+}
+
+.podium-base {
+  width: 200px;
+  height: 30px;
+  background: linear-gradient(to bottom, #4A3829 0%, #2A2020 100%);
+  border-radius: 0 0 10px 10px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.8);
+}
+
+.speaker-box {
+  width: 100%;
+  max-width: 600px;
+  min-height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+.speech-bubble {
+  background: rgba(255, 255, 255, 0.95);
+  color: #2a2a2a;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  position: relative;
+  animation: bubble-appear 0.5s ease-out;
+}
+
+@keyframes bubble-appear {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.speech-bubble::before {
+  content: '';
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-bottom: 15px solid rgba(255, 255, 255, 0.95);
+}
+
+.speech-author {
+  font-weight: bold;
+  color: #444;
+  margin-bottom: 10px;
+  font-size: 1.1em;
+}
+
+.speech-text {
+  font-size: 1.05em;
+  line-height: 1.6;
+  font-style: italic;
+}
+
+.waiting-text {
+  text-align: center;
+  color: #666;
+  font-style: italic;
+}
+
+.podium-form {
+  background: linear-gradient(135deg, rgba(139, 115, 85, 0.2), rgba(107, 83, 69, 0.2));
+  border: 3px solid #8B7355;
+}
+
+.podium-form button {
+  background: linear-gradient(135deg, #8B7355 0%, #6B5345 100%);
+  color: #fff;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.podium-form button:hover {
+  background: linear-gradient(135deg, #9B8365 0%, #7B6355 100%);
+  box-shadow: 0 0 20px rgba(139, 115, 85, 0.5);
+}
+
+.podium-statements .comment-item {
+  background: rgba(139, 115, 85, 0.1);
+  border-left-color: #8B7355;
+  border-left-width: 6px;
+}
+
+.podium-statements .comment-item::before {
+  content: '🎙️';
+  position: absolute;
+  left: -35px;
+  top: 15px;
+  font-size: 1.3em;
+}
+
+.podium-statements .comment-text {
+  font-style: italic;
+  font-size: 1.05em;
+  line-height: 1.7;
+}
+
+@media (max-width: 768px) {
+  .podium-stage {
+    min-height: 400px;
+    padding: 30px 15px;
+  }
+  
+  .spotlight {
+    width: 200px;
+  }
+  
+  .speech-bubble {
+    padding: 20px;
+  }
+}

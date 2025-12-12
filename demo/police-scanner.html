@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>THE POLICE SCANNER FEED</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/shared.css">
+  <link rel="stylesheet" href="css/police-scanner.css">
+</head>
+<body>
+  <div class="container">
+    <a href="index.html" class="back-link">← Back to Demo Index</a>
+    
+    <header>
+      <h1>THE POLICE SCANNER FEED</h1>
+      <p>A retro emergency-radio theme where messages roll in like dispatch logs.</p>
+    </header>
+
+    <div class="scanner-container">
+      <div class="radio-unit">
+        <div class="radio-display">
+          <div class="radio-header">
+            <span class="status-light"></span>
+            <span>EMERGENCY RESPONSE NETWORK</span>
+            <span class="frequency">147.820 MHz</span>
+          </div>
+          <div id="dispatch-log" class="dispatch-log"></div>
+        </div>
+        <div class="radio-controls">
+          <div class="radio-knob"></div>
+          <div class="radio-speaker">
+            <div class="speaker-grill"></div>
+          </div>
+          <div class="radio-knob"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="topic-selector">
+      <label for="topic-select">EMERGENCY TOPIC CHANNEL</label>
+      <select id="topic-select">
+        <option value="emergency-resources">What emergency resources did you need most this week?</option>
+        <option value="cold-weather-gaps">Where are the gaps in Cobourg's cold-weather response?</option>
+        <option value="overdose-alerts">How can overdose alerts reach more people fast?</option>
+        <option value="biggest-risk">What's the biggest risk for people sleeping outside tonight?</option>
+        <option value="prevent-deaths">How can we prevent deaths during winter?</option>
+        <option value="first-responders">What do you wish first responders understood better?</option>
+        <option value="warming-rooms-safety">How could warming rooms improve safety?</option>
+        <option value="safe-sleep-locations">Where should new safe-sleep locations be created?</option>
+        <option value="crisis-response-failed">How has crisis response failed people here?</option>
+        <option value="overnight-shelter">What would a proper overnight shelter look like?</option>
+      </select>
+    </div>
+
+    <div class="comment-section">
+      <h2>BROADCAST TO DISPATCH</h2>
+      <form id="comment-form" class="comment-form scanner-form">
+        <input type="text" id="comment-name" placeholder="Call sign (or Anonymous)" maxlength="50">
+        <textarea id="comment-text" placeholder="Your dispatch message..." maxlength="500" required></textarea>
+        <button type="submit">📡 TRANSMIT</button>
+      </form>
+
+      <h2>FULL DISPATCH LOG</h2>
+      <ul id="comments-list" class="comments-list scanner-comments"></ul>
+    </div>
+  </div>
+
+  <script src="js/shared.js"></script>
+  <script src="js/police-scanner.js"></script>
+</body>
+</html>

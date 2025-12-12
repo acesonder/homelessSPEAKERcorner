@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>THE GRAFFITI WALL OF TRUTH</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Permanent+Marker&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/shared.css">
+  <link rel="stylesheet" href="css/graffiti-wall.css">
+</head>
+<body>
+  <div class="container">
+    <a href="index.html" class="back-link">← Back to Demo Index</a>
+    
+    <header>
+      <h1>THE GRAFFITI WALL OF TRUTH</h1>
+      <p>A digital wall styled like layered posters, torn stickers, chalk scrawls, and marker messages.</p>
+    </header>
+
+    <div class="topic-selector">
+      <label for="topic-select">TAG THE WALL ABOUT...</label>
+      <select id="topic-select">
+        <option value="your-story">What's your story with homelessness in Northumberland County?</option>
+        <option value="drugs-survival">How do drugs and survival connect for you or people you know?</option>
+        <option value="message-leaders">If you could write one message to local leaders, what would it say?</option>
+        <option value="stuck-cycle">What keeps people stuck in the cycle?</option>
+        <option value="moments-hope">What moments of hope have you seen lately?</option>
+        <option value="system-failed">How often has the system failed you or someone close?</option>
+        <option value="survive-hardest">What helped you survive your hardest night?</option>
+        <option value="stop-assuming">What should people stop assuming about homelessness?</option>
+        <option value="healing-looks">What does healing look like to you?</option>
+        <option value="warming-room">What would you add to a proper warming room?</option>
+      </select>
+    </div>
+
+    <div class="wall-container">
+      <canvas id="wall-canvas"></canvas>
+      <div id="wall-tags" class="wall-tags"></div>
+    </div>
+
+    <div class="comment-section">
+      <h2>TAG THE WALL</h2>
+      <form id="comment-form" class="comment-form">
+        <input type="text" id="comment-name" placeholder="Your tag name (or stay Anonymous)" maxlength="50">
+        <textarea id="comment-text" placeholder="Speak your truth..." maxlength="500" required></textarea>
+        <div class="tag-style-selector">
+          <label>Tag Style:</label>
+          <select id="tag-style">
+            <option value="spray">🎨 Spray Paint</option>
+            <option value="marker">✏️ Marker</option>
+            <option value="chalk">📝 Chalk</option>
+            <option value="sticker">🏷️ Sticker</option>
+            <option value="poster">📄 Poster</option>
+          </select>
+        </div>
+        <button type="submit">🖌️ TAG IT</button>
+      </form>
+
+      <h2>ALL TAGS</h2>
+      <ul id="comments-list" class="comments-list"></ul>
+    </div>
+  </div>
+
+  <script src="js/shared.js"></script>
+  <script src="js/graffiti-wall.js"></script>
+</body>
+</html>

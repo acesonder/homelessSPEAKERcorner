@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>THE STREETLIGHT TOPIC LANTERN</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/shared.css">
+  <link rel="stylesheet" href="css/streetlight-lantern.css">
+</head>
+<body>
+  <div class="night-sky"></div>
+  
+  <div class="container">
+    <a href="index.html" class="back-link">← Back to Demo Index</a>
+    
+    <header>
+      <h1>THE STREETLIGHT TOPIC LANTERN</h1>
+      <p>A tall digital streetlamp glows at the edge of the page, its soft halo changing colour with each topic.</p>
+    </header>
+
+    <div class="streetlight-container">
+      <div class="lamppost">
+        <div class="lamp-top">
+          <div id="lamp-bulb" class="lamp-bulb" data-color="blue"></div>
+          <div class="lamp-glow"></div>
+        </div>
+        <div class="lamp-pole"></div>
+        <div class="lamp-base"></div>
+      </div>
+      
+      <div class="lamp-info">
+        <div class="time-display">2:47 AM</div>
+        <p>Standing on a quiet corner, sharing stories under the lamp</p>
+      </div>
+    </div>
+
+    <div class="topic-selector">
+      <label for="topic-select">TONIGHT'S CONVERSATION</label>
+      <select id="topic-select">
+        <option value="sleep-difficulty" data-color="blue">What's the hardest part of trying to sleep when you're unhoused?</option>
+        <option value="outreach-night" data-color="blue">How could outreach teams be more effective at night?</option>
+        <option value="mental-health" data-color="yellow">What mental health supports feel missing in our community?</option>
+        <option value="detox-program" data-color="green">What kind of detox or stabilization program would help the most people?</option>
+        <option value="warming-room-fear" data-color="red">What's your biggest fear when the warming room closes?</option>
+        <option value="winter-changes" data-color="blue">How does winter change everything?</option>
+        <option value="emergency-beds" data-color="red">What type of emergency beds should Cobourg invest in?</option>
+        <option value="shelter-rules" data-color="yellow">How do shelter rules help or harm people?</option>
+        <option value="resource-wish" data-color="green">What's a resource you wish existed right now?</option>
+        <option value="exhaustion-trauma" data-color="red">How do exhaustion and trauma interact for people on the streets?</option>
+      </select>
+    </div>
+
+    <div class="comment-section">
+      <h2>SHARE UNDER THE LIGHT</h2>
+      <form id="comment-form" class="comment-form">
+        <input type="text" id="comment-name" placeholder="Your name (or stay Anonymous)" maxlength="50">
+        <textarea id="comment-text" placeholder="Your story matters..." maxlength="500" required></textarea>
+        <button type="submit">✨ Release into the Night</button>
+      </form>
+
+      <h2>FIREFLY VOICES</h2>
+      <div id="firefly-container" class="firefly-container"></div>
+      
+      <ul id="comments-list" class="comments-list"></ul>
+    </div>
+  </div>
+
+  <script src="js/shared.js"></script>
+  <script src="js/streetlight-lantern.js"></script>
+</body>
+</html>

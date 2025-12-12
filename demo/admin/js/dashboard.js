@@ -172,11 +172,23 @@ function setupEmergencyMode() {
     emergencySection.style.display = 'block';
   }
   
+  // Load saved state
+  const savedState = localStorage.getItem(STORAGE_PREFIX + 'emergency_mode') === 'true';
+  if (emergencyToggle && savedState) {
+    emergencyToggle.checked = true;
+    emergencyStatus.textContent = 'ON';
+    emergencyStatus.style.color = '#ff3333';
+    emergencyControls.style.display = 'block';
+  }
+  
   if (emergencyToggle) {
     emergencyToggle.addEventListener('change', function() {
       const isOn = this.checked;
       emergencyStatus.textContent = isOn ? 'ON' : 'OFF';
       emergencyControls.style.display = isOn ? 'block' : 'none';
+      
+      // Persist state
+      localStorage.setItem(STORAGE_PREFIX + 'emergency_mode', isOn);
       
       if (isOn) {
         emergencyStatus.style.color = '#ff3333';

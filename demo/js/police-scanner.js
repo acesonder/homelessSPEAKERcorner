@@ -2,12 +2,6 @@
 
 const PROJECT_KEY = 'police_scanner';
 
-// Generate timestamp in HH:MM:SS format
-function getDispatchTime() {
-  const now = new Date();
-  return now.toLocaleTimeString('en-US', { hour12: false });
-}
-
 // Render dispatch log (recent messages)
 function renderDispatchLog() {
   const dispatchLog = document.getElementById('dispatch-log');

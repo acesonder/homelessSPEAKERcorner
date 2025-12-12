@@ -121,7 +121,7 @@ function setupCustomCommentForm() {
     renderAll();
     
     // Speak comment if audio mode is on
-    if (typeof speakText === 'function') {
+    if (window.speechSynthesis && typeof speakText === 'function') {
       speakText(`${name} tagged: ${text}`);
     }
   });

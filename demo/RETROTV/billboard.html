@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BILLBOARD - SPEAKERS CORNER ...OF NO FIXED ADDRESS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/shared.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/billboard.css">
+</head>
+<body>
+  <!-- Top Navigation -->
+  <nav class="top-nav">
+    <a href="index.html" class="nav-logo">📺 SPEAKERS CORNER</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Record</a></li>
+      <li><a href="billboard.html" class="active">Billboard</a></li>
+      <li><a href="admin/index.html">Admin</a></li>
+      <li><a href="../index.html">← Back to Demos</a></li>
+    </ul>
+  </nav>
+
+  <!-- CTA Banner -->
+  <div class="cta-banner">
+    <h2>📋 QUESTION BILLBOARD</h2>
+    <p>Answer questions one by one. Your responses help tell the story.</p>
+  </div>
+
+  <!-- Main Content -->
+  <div class="container">
+    <div class="two-column">
+      <!-- Left Side - Recording TV -->
+      <div class="record-tv-section">
+        <h3 style="text-align: center; color: #ff3333; margin-bottom: 20px;">📹 RECORDING STATION</h3>
+        
+        <div class="record-tv-container">
+          <div class="tv-frame">
+            <div class="tv-screen" id="tv-screen">
+              <!-- Static Effect -->
+              <div class="tv-static"></div>
+              <div class="tv-scanlines"></div>
+              
+              <!-- Video Elements -->
+              <video id="preview-video" autoplay muted playsinline style="width: 100%; height: 100%; object-fit: cover;"></video>
+              <video id="playback-video" playsinline controls style="width: 100%; height: 100%; object-fit: cover;"></video>
+              
+              <!-- Recording Indicator -->
+              <div class="recording-indicator hidden" id="recording-indicator">
+                <div class="rec-dot"></div>
+                <span class="rec-text">REC</span>
+              </div>
+              
+              <!-- TV Glow -->
+              <div class="tv-glow"></div>
+            </div>
+            <div class="tv-base">
+              <div class="tv-speaker"></div>
+              <div class="tv-knob"></div>
+              <div class="tv-knob"></div>
+            </div>
+          </div>
+          
+          <!-- Timer Bar -->
+          <div class="timer-bar">
+            <div class="timer-progress" id="timer-progress"></div>
+          </div>
+          <div class="timer-text" id="timer-text">Time: 2:30</div>
+        </div>
+        
+        <!-- Recording Controls -->
+        <div class="record-controls">
+          <button class="record-btn" id="record-btn">
+            🔴 RECORD
+          </button>
+          <button class="record-btn" id="stop-btn" disabled>
+            ⬛ STOP
+          </button>
+          <button class="record-btn" id="retry-btn" disabled>
+            🔄 RETRY
+          </button>
+          <button class="record-btn" id="playback-btn" disabled>
+            ▶️ PLAYBACK
+          </button>
+          <button class="record-btn upload" id="upload-btn" disabled>
+            ⬆️ UPLOAD ALL
+          </button>
+        </div>
+        
+        <!-- Status Message -->
+        <div class="status-message info" id="status-message" style="margin-top: 15px;">
+          Ready to record! Select a question to begin.
+        </div>
+        
+        <!-- Recorded Clips -->
+        <div class="clips-container">
+          <h4>📼 Recorded Clips</h4>
+          <div class="clips-list" id="clips-list">
+            <p style="color: #888; text-align: center;">No clips recorded yet</p>
+          </div>
+        </div>
+        
+        <!-- Upload Progress -->
+        <div class="upload-progress">
+          <div class="upload-progress-bar">
+            <div class="upload-progress-fill" id="upload-progress-fill"></div>
+          </div>
+          <div class="upload-status" id="upload-status"></div>
+        </div>
+      </div>
+
+      <!-- Right Side - Digital Billboard -->
+      <div class="billboard-section">
+        <h3 style="text-align: center; color: #ffcc00; margin-bottom: 20px;">📋 QUESTION BILLBOARD</h3>
+        
+        <div class="billboard-container">
+          <div class="billboard-frame">
+            <div class="billboard-screen">
+              <div class="billboard-glow"></div>
+              <div class="billboard-header">NOW DISPLAYING</div>
+              <div class="billboard-question" id="billboard-question">
+                Loading question...
+              </div>
+              <div class="billboard-footer">
+                <span>📊 <span id="question-count">0</span> questions</span>
+                <span>📹 <span id="response-count">0</span> responses</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Question Indicators -->
+        <div class="question-indicator" id="question-indicators">
+          <!-- Dots will be generated by JS -->
+        </div>
+        
+        <!-- Billboard Controls -->
+        <div class="billboard-controls">
+          <button class="billboard-btn" id="start-btn">
+            ▶️ START
+          </button>
+          <button class="billboard-btn" id="prev-btn">
+            ⬅️ PREVIOUS
+          </button>
+          <button class="billboard-btn" id="next-btn">
+            ➡️ NEXT
+          </button>
+          <button class="billboard-btn" id="skip-btn">
+            ⏭️ SKIP
+          </button>
+        </div>
+        
+        <!-- Instructions -->
+        <div style="margin-top: 30px; padding: 20px; background: rgba(0,0,0,0.3); border-radius: 10px; border: 1px solid #444;">
+          <h4 style="color: #ffcc00; margin-bottom: 15px;">📝 How it works:</h4>
+          <ol style="color: #ccc; padding-left: 20px; line-height: 2;">
+            <li>Click <strong>START</strong> to begin the session</li>
+            <li>Read the question displayed on the billboard</li>
+            <li>Click <strong>RECORD</strong> to capture your response</li>
+            <li>Use <strong>NEXT</strong> to move to the next question</li>
+            <li>When done, click <strong>UPLOAD ALL</strong> to save your responses</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer style="text-align: center; padding: 40px 20px; color: #666; border-top: 2px solid #333; margin-top: 40px;">
+    <p>SPEAKERS CORNER ...OF NO FIXED ADDRESS</p>
+    <p style="margin-top: 10px; font-size: 0.9em;">
+      Recording responses one question at a time.
+    </p>
+  </footer>
+
+  <script src="js/shared.js"></script>
+  <script src="js/billboard.js"></script>
+</body>
+</html>

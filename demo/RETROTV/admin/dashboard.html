@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard - SPEAKERS CORNER</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+  <div class="admin-container">
+    <!-- Header -->
+    <div class="admin-header">
+      <h1>🎛️ SPEAKERS CORNER ADMIN</h1>
+      <div class="status-indicator">
+        <span class="status-light"></span>
+        <span>SYSTEM ONLINE</span>
+        <button class="logout-btn" onclick="logout()">Logout</button>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <h3>Total Questions</h3>
+        <div class="value" id="total-questions">0</div>
+      </div>
+      <div class="stat-card">
+        <h3>Total Videos</h3>
+        <div class="value" id="total-videos">0</div>
+      </div>
+      <div class="stat-card">
+        <h3>Today's Uploads</h3>
+        <div class="value" id="today-uploads">0</div>
+      </div>
+      <div class="stat-card">
+        <h3>Active Sessions</h3>
+        <div class="value" id="active-sessions">1</div>
+      </div>
+    </div>
+
+    <!-- Questions Management -->
+    <div class="section">
+      <h2>📝 QUESTION MANAGEMENT</h2>
+      <p style="color: #888; margin-bottom: 20px;">
+        Manage the questions displayed on the billboard. Drag to reorder.
+      </p>
+      
+      <!-- Add Question Form -->
+      <div class="add-question-form">
+        <input type="text" id="new-question" placeholder="Enter a new question..." maxlength="200">
+        <button onclick="addQuestion()">➕ Add Question</button>
+      </div>
+      
+      <!-- Questions List -->
+      <div class="questions-list" id="questions-list">
+        <!-- Questions will be rendered here -->
+      </div>
+    </div>
+
+    <!-- Videos Section -->
+    <div class="section">
+      <h2>📹 VIDEO RESPONSES</h2>
+      
+      <!-- Filter -->
+      <div class="filter-bar">
+        <select id="question-filter" onchange="filterVideos()">
+          <option value="all">All Questions</option>
+          <!-- Options will be populated by JS -->
+        </select>
+        <select id="sort-filter" onchange="filterVideos()">
+          <option value="newest">Newest First</option>
+          <option value="oldest">Oldest First</option>
+        </select>
+      </div>
+      
+      <!-- Bulk Actions -->
+      <div class="bulk-actions">
+        <button class="bulk-btn primary" onclick="shareSelected()">📤 Share Selected</button>
+        <button class="bulk-btn" onclick="exportVideos()">📥 Export Data</button>
+        <button class="bulk-btn" onclick="clearAllVideos()" style="background: #cc0000; border-color: #ff3333;">🗑️ Clear All</button>
+      </div>
+      
+      <!-- Videos Grid -->
+      <div class="videos-grid" id="videos-grid">
+        <!-- Videos will be rendered here -->
+      </div>
+    </div>
+
+    <!-- Quick Links -->
+    <div class="section">
+      <h2>🔗 QUICK LINKS</h2>
+      <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+        <a href="../index.html" style="padding: 15px 25px; background: #333; color: #e0e0e0; text-decoration: none; border-radius: 8px; border: 2px solid #555;">
+          📺 Main Recording Page
+        </a>
+        <a href="../billboard.html" style="padding: 15px 25px; background: #333; color: #e0e0e0; text-decoration: none; border-radius: 8px; border: 2px solid #555;">
+          📋 Billboard Page
+        </a>
+        <a href="../../index.html" style="padding: 15px 25px; background: #333; color: #e0e0e0; text-decoration: none; border-radius: 8px; border: 2px solid #555;">
+          ← Back to Demo Index
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const STORAGE_PREFIX = 'retrotv_';
+    
+    // Default questions
+    const DEFAULT_QUESTIONS = [
+      "What barriers stop people from getting permanent housing right now?",
+      "How does sleep deprivation affect your daily functioning?",
+      "What support services actually make a difference for people using substances?",
+      "What single policy change would help the most people today?",
+      "What does a 'safe place to sleep' mean to you personally?",
+      "How do stigma and judgment impact someone's recovery journey?",
+      "What's something people misunderstand about addiction?",
+      "What would you want the public to know about homelessness?",
+      "What gives you hope for the future?",
+      "If you could change one thing about how society treats homeless people, what would it be?"
+    ];
+    
+    // Check auth
+    function checkAuth() {
+      const authenticated = localStorage.getItem(STORAGE_PREFIX + 'admin_authenticated');
+      const loginTime = localStorage.getItem(STORAGE_PREFIX + 'admin_login_time');
+      
+      if (!authenticated || !loginTime) {
+        window.location.href = 'index.html';
+        return false;
+      }
+      
+      const sessionDuration = 24 * 60 * 60 * 1000;
+      if (Date.now() - parseInt(loginTime) > sessionDuration) {
+        logout();
+        return false;
+      }
+      
+      return true;
+    }
+    
+    // Logout
+    function logout() {
+      localStorage.removeItem(STORAGE_PREFIX + 'admin_authenticated');
+      localStorage.removeItem(STORAGE_PREFIX + 'admin_login_time');
+      window.location.href = 'index.html';
+    }
+    
+    // Get questions
+    function getQuestions() {
+      const data = localStorage.getItem(STORAGE_PREFIX + 'questions');
+      if (!data) {
+        const questions = DEFAULT_QUESTIONS.map((text, index) => ({
+          id: Date.now() + index,
+          text: text,
+          order: index,
+          active: true
+        }));
+        localStorage.setItem(STORAGE_PREFIX + 'questions', JSON.stringify(questions));
+        return questions;
+      }
+      return JSON.parse(data).sort((a, b) => a.order - b.order);
+    }
+    
+    // Save questions
+    function saveQuestions(questions) {
+      localStorage.setItem(STORAGE_PREFIX + 'questions', JSON.stringify(questions));
+    }
+    
+    // Get videos
+    function getVideos() {
+      const data = localStorage.getItem(STORAGE_PREFIX + 'videos');
+      return data ? JSON.parse(data) : [];
+    }
+    
+    // Save videos
+    function saveVideos(videos) {
+      localStorage.setItem(STORAGE_PREFIX + 'videos', JSON.stringify(videos));
+    }
+    
+    // Render stats
+    function renderStats() {
+      const questions = getQuestions();
+      const videos = getVideos();
+      const today = new Date().toDateString();
+      const todayVideos = videos.filter(v => new Date(v.timestamp).toDateString() === today);
+      
+      document.getElementById('total-questions').textContent = questions.length;
+      document.getElementById('total-videos').textContent = videos.length;
+      document.getElementById('today-uploads').textContent = todayVideos.length;
+    }
+    
+    // Render questions
+    function renderQuestions() {
+      const questions = getQuestions();
+      const container = document.getElementById('questions-list');
+      
+      if (questions.length === 0) {
+        container.innerHTML = '<p style="color: #888; text-align: center; padding: 40px;">No questions configured</p>';
+        return;
+      }
+      
+      container.innerHTML = questions.map((q, index) => `
+        <div class="question-item" data-id="${q.id}">
+          <div class="question-order">${index + 1}</div>
+          <div class="question-text">${escapeHtml(q.text)}</div>
+          <div class="question-actions">
+            <button class="question-btn" onclick="editQuestion(${q.id})">✏️ Edit</button>
+            <button class="question-btn" onclick="moveQuestion(${q.id}, -1)">⬆️</button>
+            <button class="question-btn" onclick="moveQuestion(${q.id}, 1)">⬇️</button>
+            <button class="question-btn delete" onclick="deleteQuestion(${q.id})">🗑️</button>
+          </div>
+        </div>
+      `).join('');
+    }
+    
+    // Add question
+    function addQuestion() {
+      const input = document.getElementById('new-question');
+      const text = input.value.trim();
+      
+      if (!text) {
+        alert('Please enter a question');
+        return;
+      }
+      
+      const questions = getQuestions();
+      questions.push({
+        id: Date.now(),
+        text: text,
+        order: questions.length,
+        active: true
+      });
+      
+      saveQuestions(questions);
+      input.value = '';
+      renderQuestions();
+      renderStats();
+      updateQuestionFilter();
+    }
+    
+    // Edit question
+    function editQuestion(id) {
+      const questions = getQuestions();
+      const question = questions.find(q => q.id === id);
+      
+      if (!question) return;
+      
+      const newText = prompt('Edit question:', question.text);
+      if (newText && newText.trim()) {
+        question.text = newText.trim();
+        saveQuestions(questions);
+        renderQuestions();
+      }
+    }
+    
+    // Delete question
+    function deleteQuestion(id) {
+      if (!confirm('Are you sure you want to delete this question?')) return;
+      
+      let questions = getQuestions();
+      questions = questions.filter(q => q.id !== id);
+      
+      // Reorder
+      questions.forEach((q, index) => {
+        q.order = index;
+      });
+      
+      saveQuestions(questions);
+      renderQuestions();
+      renderStats();
+      updateQuestionFilter();
+    }
+    
+    // Move question
+    function moveQuestion(id, direction) {
+      const questions = getQuestions();
+      const index = questions.findIndex(q => q.id === id);
+      
+      if (index === -1) return;
+      
+      const newIndex = index + direction;
+      if (newIndex < 0 || newIndex >= questions.length) return;
+      
+      // Swap
+      [questions[index], questions[newIndex]] = [questions[newIndex], questions[index]];
+      
+      // Update order
+      questions.forEach((q, i) => {
+        q.order = i;
+      });
+      
+      saveQuestions(questions);
+      renderQuestions();
+    }
+    
+    // Update question filter dropdown
+    function updateQuestionFilter() {
+      const questions = getQuestions();
+      const select = document.getElementById('question-filter');
+      
+      select.innerHTML = '<option value="all">All Questions</option>';
+      questions.forEach((q, index) => {
+        select.innerHTML += `<option value="${q.id}">Q${index + 1}: ${q.text.substring(0, 40)}...</option>`;
+      });
+    }
+    
+    // Render videos
+    function renderVideos() {
+      const videos = getVideos();
+      const container = document.getElementById('videos-grid');
+      const questionFilter = document.getElementById('question-filter').value;
+      const sortFilter = document.getElementById('sort-filter').value;
+      
+      let filtered = videos;
+      
+      if (questionFilter !== 'all') {
+        filtered = filtered.filter(v => v.questionId === parseInt(questionFilter));
+      }
+      
+      if (sortFilter === 'newest') {
+        filtered.sort((a, b) => b.timestamp - a.timestamp);
+      } else {
+        filtered.sort((a, b) => a.timestamp - b.timestamp);
+      }
+      
+      if (filtered.length === 0) {
+        container.innerHTML = '<p style="color: #888; text-align: center; padding: 40px; grid-column: 1/-1;">No videos found</p>';
+        return;
+      }
+      
+      container.innerHTML = filtered.map(video => `
+        <div class="video-card">
+          <div class="video-preview">
+            <div class="play-overlay">▶</div>
+          </div>
+          <div class="video-info">
+            <h4>Q${video.questionIndex + 1} Response</h4>
+            <p>${escapeHtml(video.questionText ? video.questionText.substring(0, 50) + '...' : 'Unknown question')}</p>
+            <p>Duration: ${formatDuration(video.duration || 0)} • ${formatTime(video.timestamp)}</p>
+            <div class="video-actions">
+              <button class="video-btn share" onclick="shareVideo('${video.id}')">📤 Share</button>
+              <button class="video-btn delete" onclick="deleteVideo('${video.id}')">🗑️</button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+    
+    // Filter videos
+    function filterVideos() {
+      renderVideos();
+    }
+    
+    // Share video
+    function shareVideo(id) {
+      alert('Video shared to landing page! (Demo - In production, this would publish the video)');
+    }
+    
+    // Share selected
+    function shareSelected() {
+      alert('Selected videos shared! (Demo - In production, this would batch publish videos)');
+    }
+    
+    // Export videos
+    function exportVideos() {
+      const videos = getVideos();
+      const dataStr = JSON.stringify(videos, null, 2);
+      const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+      
+      const link = document.createElement('a');
+      link.setAttribute('href', dataUri);
+      link.setAttribute('download', 'speakers_corner_videos.json');
+      link.click();
+    }
+    
+    // Delete video
+    function deleteVideo(id) {
+      if (!confirm('Are you sure you want to delete this video?')) return;
+      
+      let videos = getVideos();
+      videos = videos.filter(v => v.id !== id);
+      saveVideos(videos);
+      renderVideos();
+      renderStats();
+    }
+    
+    // Clear all videos
+    function clearAllVideos() {
+      if (!confirm('Are you sure you want to delete ALL videos? This cannot be undone.')) return;
+      
+      saveVideos([]);
+      renderVideos();
+      renderStats();
+    }
+    
+    // Helper functions
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+    
+    function formatDuration(seconds) {
+      const mins = Math.floor(seconds / 60);
+      const secs = Math.floor(seconds % 60);
+      return `${mins}:${secs.toString().padStart(2, '0')}`;
+    }
+    
+    function formatTime(timestamp) {
+      const date = new Date(timestamp);
+      return date.toLocaleDateString() + ' ' + date.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+    }
+    
+    // Initialize
+    document.addEventListener('DOMContentLoaded', function() {
+      if (!checkAuth()) return;
+      
+      renderStats();
+      renderQuestions();
+      updateQuestionFilter();
+      renderVideos();
+    });
+  </script>
+</body>
+</html>

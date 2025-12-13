@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SPEAKERS CORNER ...OF NO FIXED ADDRESS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/shared.css">
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+  <!-- Top Navigation -->
+  <nav class="top-nav">
+    <a href="index.html" class="nav-logo">📺 SPEAKERS CORNER</a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">Record</a></li>
+      <li><a href="billboard.html">Billboard</a></li>
+      <li><a href="admin/index.html">Admin</a></li>
+      <li><a href="../index.html">← Back to Demos</a></li>
+    </ul>
+  </nav>
+
+  <!-- CTA Banner -->
+  <div class="cta-banner" id="cta-banner">
+    <h2>🎤 SPEAK YOUR TRUTH</h2>
+    <p>Record your voice. Share your story. Make a difference.</p>
+  </div>
+
+  <!-- Info Blurb -->
+  <div class="info-blurb">
+    <p>
+      The on-screen timer flashes a <strong>10-second countdown</strong> with a beep sound before recording. 
+      Speak for up to <strong>2:30</strong> and add one text title to label your rant 
+      ("Why Tim Hortons Double Doubles Are Overrated").
+    </p>
+    <p>
+      Pick from <strong>VHS grain</strong>, <strong>neon overlay</strong>, or <strong>scan-line filters</strong>. 
+      No face-tuning, no fancy effects—just you, the mic, and the vibes.
+    </p>
+    
+    <!-- Landing State - shown initially -->
+    <div id="landing-state" class="landing-state">
+      <button id="main-cta" class="main-cta-btn">CLICK TO START</button>
+    </div>
+  </div>
+
+  <!-- Main Recording Section -->
+  <div class="container">
+    <div class="two-column">
+      <!-- Left Side - Control Panel -->
+      <div class="control-panel hidden" id="control-panel">
+        <h3>🎛️ Control Panel</h3>
+        
+        <!-- Question Display -->
+        <div class="question-display" id="question-display">
+          <p>Loading questions...</p>
+        </div>
+        <p class="question-number" id="question-number">Question 1 of 10</p>
+        
+        <!-- Filter Selection -->
+        <div style="margin: 15px 0; padding: 15px; background: rgba(0,0,0,0.3); border-radius: 8px;">
+          <p style="margin-bottom: 10px; color: #888;">Choose a filter:</p>
+          <label style="display: block; margin: 8px 0; cursor: pointer;">
+            <input type="radio" name="filter" value="vhs" checked> VHS grain
+          </label>
+          <label style="display: block; margin: 8px 0; cursor: pointer;">
+            <input type="radio" name="filter" value="neon"> Neon glow
+          </label>
+          <label style="display: block; margin: 8px 0; cursor: pointer;">
+            <input type="radio" name="filter" value="scan"> Scan lines
+          </label>
+        </div>
+        
+        <!-- Control Buttons -->
+        <button class="control-btn" id="start-record-btn" disabled>
+          🔴 START RECORDING
+        </button>
+        <button class="control-btn recording" id="stop-record-btn" disabled>
+          ⬛ STOP RECORDING
+        </button>
+        <button class="control-btn" id="next-question-btn">
+          ➡️ SHOW NEXT QUESTION
+        </button>
+        <button class="control-btn" id="retry-btn" disabled>
+          🔄 RETRY
+        </button>
+        <button class="control-btn active" id="upload-btn" disabled>
+          ⬆️ UPLOAD & CONTINUE
+        </button>
+        
+        <!-- Status Message -->
+        <div class="status-message info hidden" id="status-message">
+          Ready to record!
+        </div>
+      </div>
+
+      <!-- Right Side - TV Screen -->
+      <div class="tv-section">
+        <div class="tv-container filter-vhs" id="recording-state">
+          <div class="tv-frame">
+            <div class="tv-screen" id="tv-screen">
+              <!-- Static Effect -->
+              <div class="tv-static"></div>
+              <div class="tv-scanlines"></div>
+              
+              <!-- Video Elements -->
+              <video id="preview-video" autoplay muted playsinline></video>
+              <video id="playback-video" class="hidden" playsinline controls></video>
+              
+              <!-- Recording Indicator -->
+              <div class="recording-indicator hidden" id="recording-indicator">
+                <div class="rec-dot"></div>
+                <span class="rec-text">REC</span>
+              </div>
+              
+              <!-- Countdown Overlay -->
+              <div class="countdown-overlay hidden" id="countdown-overlay">
+                <div class="countdown-number" id="countdown-number">10</div>
+                <div class="countdown-text">Get ready...</div>
+              </div>
+              
+              <!-- TV Glow -->
+              <div class="tv-glow"></div>
+              
+              <!-- Initial Overlay (before camera) -->
+              <div class="tv-overlay" id="tv-overlay">
+                <h3>📺 SPEAKERS CORNER</h3>
+                <p>Click "CLICK TO START" to begin</p>
+                <p style="font-size: 0.9em; color: #888;">Camera and microphone access required</p>
+              </div>
+            </div>
+            <div class="tv-base">
+              <div class="tv-speaker"></div>
+              <div class="tv-knob"></div>
+              <div class="tv-knob"></div>
+            </div>
+          </div>
+          
+          <!-- Timer Bar -->
+          <div class="timer-bar">
+            <div class="timer-progress" id="timer-progress"></div>
+          </div>
+          <div class="timer-text" id="timer-text">Time remaining: 2:30</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Uploaded Videos Section -->
+  <div class="container">
+    <div class="uploaded-section" id="uploaded-section">
+      <h3>📼 Recent Recordings</h3>
+      <div class="video-grid" id="video-grid">
+        <p style="color: #888; text-align: center; grid-column: 1/-1;">
+          Your recorded videos will appear here after uploading.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer style="text-align: center; padding: 40px 20px; color: #666; border-top: 2px solid #333; margin-top: 40px;">
+    <p>SPEAKERS CORNER ...OF NO FIXED ADDRESS</p>
+    <p style="margin-top: 10px; font-size: 0.9em;">
+      A platform for voices that need to be heard.
+    </p>
+  </footer>
+
+  <script src="js/shared.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

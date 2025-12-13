@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Login - SPEAKERS CORNER</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body class="login-page">
+  <div class="login-container">
+    <div class="login-box">
+      <h1>🔐 ADMIN CONSOLE</h1>
+      <p class="login-subtitle">SPEAKERS CORNER Control Room</p>
+      
+      <form id="login-form">
+        <div class="form-group">
+          <label for="passcode">Enter Passcode</label>
+          <input type="password" id="passcode" placeholder="••••••" maxlength="6" required autofocus>
+        </div>
+        <button type="submit">ACCESS CONTROL ROOM</button>
+        <p id="error-message" class="error-message"></p>
+      </form>
+      
+      <a href="../index.html" class="back-link">← Back to SPEAKERS CORNER</a>
+    </div>
+  </div>
+
+  <script>
+    const STORAGE_PREFIX = 'retrotv_';
+    // DEMO ONLY: In production, authentication should be handled server-side
+    // This is a client-side demo for prototype purposes only
+    const CORRECT_PASSCODE = '079777';
+    
+    document.getElementById('login-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const passcode = document.getElementById('passcode').value;
+      const errorMsg = document.getElementById('error-message');
+      
+      if (passcode === CORRECT_PASSCODE) {
+        localStorage.setItem(STORAGE_PREFIX + 'admin_authenticated', 'true');
+        localStorage.setItem(STORAGE_PREFIX + 'admin_login_time', Date.now());
+        window.location.href = 'dashboard.html';
+      } else {
+        errorMsg.textContent = 'Invalid passcode. Access denied.';
+        errorMsg.style.display = 'block';
+        document.getElementById('passcode').value = '';
+        
+        // Flash red
+        document.querySelector('.login-box').style.borderColor = '#ff3333';
+        setTimeout(() => {
+          document.querySelector('.login-box').style.borderColor = '#444';
+        }, 500);
+      }
+    });
+  </script>
+</body>
+</html>

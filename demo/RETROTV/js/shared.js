@@ -1,6 +1,8 @@
 // Shared JavaScript for RETROTV project
 
 const STORAGE_PREFIX = 'retrotv_';
+const SESSION_DURATION_MS = 24 * 60 * 60 * 1000; // 24 hours
+const DATA_TRUNCATE_LENGTH = 1000;
 
 // Default questions
 const DEFAULT_QUESTIONS = [
@@ -100,7 +102,7 @@ function escapeHtml(text) {
 
 // Generate unique ID
 function generateId() {
-  return Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+  return Date.now() + '_' + Math.random().toString(36).substring(2, 11);
 }
 
 // Check admin authentication
@@ -113,8 +115,7 @@ function checkAdminAuth() {
   }
   
   // Session expires after 24 hours
-  const sessionDuration = 24 * 60 * 60 * 1000;
-  if (Date.now() - parseInt(loginTime) > sessionDuration) {
+  if (Date.now() - parseInt(loginTime) > SESSION_DURATION_MS) {
     localStorage.removeItem(STORAGE_PREFIX + 'admin_authenticated');
     localStorage.removeItem(STORAGE_PREFIX + 'admin_login_time');
     return false;

@@ -171,13 +171,23 @@ function startRecording() {
 function beginRecording() {
   recordedChunks = [];
   
+  // Check for preferred codec support
+  const preferredMimeType = 'video/webm;codecs=vp9';
+  let mimeType = preferredMimeType;
+  
+  if (!MediaRecorder.isTypeSupported(preferredMimeType)) {
+    // Try fallback codecs
+    const fallbackTypes = ['video/webm;codecs=vp8', 'video/webm', 'video/mp4'];
+    mimeType = fallbackTypes.find(type => MediaRecorder.isTypeSupported(type)) || '';
+  }
+  
   try {
-    mediaRecorder = new MediaRecorder(stream, {
-      mimeType: 'video/webm;codecs=vp9'
-    });
+    const options = mimeType ? { mimeType } : {};
+    mediaRecorder = new MediaRecorder(stream, options);
   } catch (e) {
-    // Fallback
-    mediaRecorder = new MediaRecorder(stream);
+    console.error('MediaRecorder initialization failed:', e);
+    showStatus('Recording not supported in this browser.', 'error');
+    return;
   }
   
   mediaRecorder.ondataavailable = (event) => {
@@ -351,7 +361,7 @@ function uploadRecording() {
       timestamp: Date.now(),
       duration: (Date.now() - recordingStartTime) / 1000,
       // For demo purposes - in production this would be a URL to uploaded file
-      dataUrl: reader.result.substring(0, 1000) + '...[truncated]', // Truncate for storage
+      dataUrl: reader.result.substring(0, DATA_TRUNCATE_LENGTH) + '...[truncated]', // Truncate for storage
       uploaded: true
     };
     

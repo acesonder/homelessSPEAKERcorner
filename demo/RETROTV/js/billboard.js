@@ -193,12 +193,22 @@ function startRecording() {
   
   recordedChunks = [];
   
+  // Check for preferred codec support
+  const preferredMimeType = 'video/webm;codecs=vp9';
+  let mimeType = preferredMimeType;
+  
+  if (!MediaRecorder.isTypeSupported(preferredMimeType)) {
+    const fallbackTypes = ['video/webm;codecs=vp8', 'video/webm', 'video/mp4'];
+    mimeType = fallbackTypes.find(type => MediaRecorder.isTypeSupported(type)) || '';
+  }
+  
   try {
-    mediaRecorder = new MediaRecorder(stream, {
-      mimeType: 'video/webm;codecs=vp9'
-    });
+    const options = mimeType ? { mimeType } : {};
+    mediaRecorder = new MediaRecorder(stream, options);
   } catch (e) {
-    mediaRecorder = new MediaRecorder(stream);
+    console.error('MediaRecorder initialization failed:', e);
+    showStatus('Recording not supported in this browser.', 'error');
+    return;
   }
   
   mediaRecorder.ondataavailable = (event) => {
